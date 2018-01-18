@@ -56,6 +56,7 @@ happyPeopleSchemaRDD.registerTempTable("happy_people")
 ```
 
 ```scala
+//Scala
 case class HappyPerson(handle: String, favouriteBeverage: String)
 ...
 // Create a person and turn it into a Schema RDD

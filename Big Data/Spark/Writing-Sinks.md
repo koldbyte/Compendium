@@ -44,3 +44,56 @@ val df = sqlContext.read.avro("input dir")
 // writes out compressed Avro records
 df.write.avro("output dir")
 ```
+
+## Text File
+
+### Text File From dataframe (no compression)
+
+Saves the content of the DataFrame in a text file at the specified path. The DataFrame must have only one column that is of string type. Each row becomes a new line in the output file. For example:
+
+```scala
+df.write.text(hdfsLocation)
+```
+
+### Text File From RDD (no compression)
+
+```scala
+rdd.saveAsTextFile(hdfsLocation)
+```
+
+### Text File from RDD (with compression)
+
+```scala
+rdd.saveAsTextFile(hdfsLocation, classOf[org.apache.hadoop.io.compress.GzipCodec])
+```
+
+Generally Available codecs are:
+
+* `org.apache.hadoop.io.compress.GzipCodec`
+* `org.apache.hadoop.io.compress.BZip2Codec`
+* `com.hadoop.compression.lzo.LzopCodec`
+* `org.apache.hadoop.io.compress.SnappyCodec`
+* `org.apache.hadoop.io.compress.DeflateCodec`
+* `org.apache.hadoop.io.compress.Lz4Codec`
+
+## Sequence File
+
+```scala
+rdd.saveAsObjectFile(hdfsLocation)
+```
+
+## JSON File
+
+```scala
+df.write.json(hdfsLocation)
+```
+
+```scala
+df.toJSON.saveAsTextFile(hdfsLocation)
+```
+
+## JSON File Compressed
+
+```scala
+df.toJSON.saveAsTextFile(hdfsLocation, classOf[org.apache.hadoop.io.compress.GzipCodec])
+```
