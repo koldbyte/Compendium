@@ -92,9 +92,9 @@ Import only new records based on the value of the last record in a specified col
 
 ```bash
 sqoop export \
-    --table tablename\
+    --table tablename \
     --export-dir /hdfs/data/location \
-    --connect jdbc:mysql://dbhost/dbname\
+    --connect jdbc:mysql://dbhost/dbname \
     --username dbuser --password passwd
 ```
 
@@ -152,7 +152,14 @@ MySQL will try to insert new row and if the insertion fails with duplicate uniqu
 #### Create a sqoop job
 
 ```bash
-sqoop job --create import_job -- import --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" --username retail_dba --password cloudera --table departments --target-dir /user/cloudera/departments
+sqoop job \
+    --create import_job \
+    -- import \
+    --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+    --username retail_dba \
+    --password cloudera \
+    --table departments \
+    --target-dir /user/cloudera/departments
 ```
 
 #### Sqoop Job commands
