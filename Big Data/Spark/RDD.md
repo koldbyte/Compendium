@@ -81,9 +81,6 @@ repartition is same as calling coalesce with shuffle = true
 * zip
 * zipWithIndex
 * zipWithUniqueId
-* 
-
-
 
 * `collect`
 

@@ -1,8 +1,16 @@
-# Overview
+# HDFS Commands
+
+## Overview
+
 The HDFS fs-shell supports various shell-like commands to interact with the Hadoop Distributed File System (HDFS) as well as other file systems that Hadoop supports, such as Local FS, HFTP FS, S3 FS, and others. The FS shell is invoked by:
 > `bin/hadoop fs <args>`
 
-# Common commands
+or
+
+> `hdfs dfs <args>`
+
+## Common commands
+
 1. **appendToFile**
 > Append single src, or multiple srcs from local file system to the destination file system. Also reads input from stdin and appends to destination file system.
 
@@ -25,7 +33,8 @@ The HDFS fs-shell supports various shell-like commands to interact with the Hado
 1. **tail**
 1. **test**
 
-# Other commands
+## Other commands
+
 1. **chgrp**
 1. **chmod**
 1. **chown**
@@ -40,6 +49,7 @@ The HDFS fs-shell supports various shell-like commands to interact with the Hado
 1. **touchz**
 1. **text**
 
-# Reading List
+## Reading List
+
 1. [FS Shell Commands][http://hadoop.apache.org/docs/r2.6.0/hadoop-project-dist/hadoop-common/FileSystemShell.html]
 1. [Hadoop Commands][http://hadoop.apache.org/docs/r2.6.0/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html]

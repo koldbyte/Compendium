@@ -11,6 +11,4 @@ https://tekmarathon.com/2016/12/21/sqoop-cheat-sheet/
 
 https://hadoopbaseblog.wordpress.com/2017/03/03/sqoop-related-exam-questions-cca-175/
 
-
-
 https://github.com/varunu28/Hadoop-CCA175-Commands

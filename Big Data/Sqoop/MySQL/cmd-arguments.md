@@ -1,11 +1,14 @@
+# Syntax 
+
 > Usage: mysql [OPTIONS] [database]
 
-# Options
+## Options
+
 * -h
-    * --host=name
+  * --host=name
 * -p
-    * --password[=pass]
+  * --password[=pass]
 * -u
-    * --user=name
+  * --user=name
 * -v
-    * --verbose
+  * --verbose

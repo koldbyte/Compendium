@@ -1,4 +1,6 @@
-# Creating a UDF for Spark SQL
+# UDFs
+
+## Creating a UDF for Spark SQL
 
 ```python
 # Make a UDF to tell us how long some text is
@@ -11,8 +13,8 @@ registerFunction("strLenScala", (_: String).length)
 val tweetLength = hiveCtx.sql("SELECT strLenScala('tweet') FROM tweets LIMIT 10")
 ```
 
+## Using Hive UDFs in Spark SQL
 
-# Using Hive UDFs in Spark SQL
 Note: Make sure jars for the UDF is included with the application. For JDBC servers, use `--jars` command line flag.
 
 ```python

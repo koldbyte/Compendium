@@ -1,20 +1,26 @@
 # Hive Data Definition Language
-> [Wiki Page](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)  
+
+> [Wiki Page](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)
 
 ## Create/Drop/Alter/Use **Database**
 
 ### Create database
+
 ```sql
 CREATE (DATABASE|SCHEMA) [IF NOT EXISTS] database_name
   [COMMENT database_comment]
   [LOCATION hdfs_path]
   [WITH DBPROPERTIES (property_name=property_value, ...)];
 ```
+
 ### Drop database
+
 ```sql
 DROP (DATABASE|SCHEMA) [IF EXISTS] database_name [RESTRICT|CASCADE];
 ```
+
 ### Alter database
+
 ```sql
 ALTER (DATABASE|SCHEMA) database_name SET DBPROPERTIES (property_name=property_value, ...);   -- (Note: SCHEMA added in Hive 0.14.0)
 ```
@@ -28,6 +34,7 @@ ALTER (DATABASE|SCHEMA) database_name SET LOCATION hdfs_path; -- (Note: Hive 2.2
 ```
 
 ### Use database
+
 ```sql
 USE database_name;
 USE DEFAULT;
@@ -36,15 +43,16 @@ USE DEFAULT;
 ## Create/Drop/Truncate **Table**
 
 ### Drop Table
+
 > DROP TABLE removes metadata and data for this table.
 > When dropping an EXTERNAL table, data in the table will NOT be deleted from the file system.
-
 
 ```sql
 DROP TABLE [IF EXISTS] table_name [PURGE];     -- (Note: PURGE available in Hive 0.14.0 and later)
 ```
 
 ### Truncate Table
+
 > Removes all rows from a table or partition(s)
 
 ```sql
@@ -66,25 +74,25 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name    -- (
      ON ((col_value, col_value, ...), (col_value, col_value, ...), ...)
      [STORED AS DIRECTORIES]
   [
-   [ROW FORMAT row_format] 
+   [ROW FORMAT row_format]
    [STORED AS file_format]
      | STORED BY 'storage.handler.class.name' [WITH SERDEPROPERTIES (...)]  -- (Note: Available in Hive 0.6.0 and later)
   ]
   [LOCATION hdfs_path]
   [TBLPROPERTIES (property_name=property_value, ...)]   -- (Note: Available in Hive 0.6.0 and later)
   [AS select_statement];   -- (Note: Available in Hive 0.5.0 and later; not supported for external tables)
- 
+
 CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name
   LIKE existing_table_or_view_name
   [LOCATION hdfs_path];
- 
+
 data_type
   : primitive_type
   | array_type
   | map_type
   | struct_type
   | union_type  -- (Note: Available in Hive 0.7.0 and later)
- 
+
 primitive_type
   : TINYINT
   | SMALLINT
@@ -102,25 +110,25 @@ primitive_type
   | DATE        -- (Note: Available in Hive 0.12.0 and later)
   | VARCHAR     -- (Note: Available in Hive 0.12.0 and later)
   | CHAR        -- (Note: Available in Hive 0.13.0 and later)
- 
+
 array_type
   : ARRAY < data_type >
- 
+
 map_type
   : MAP < primitive_type, data_type >
- 
+
 struct_type
   : STRUCT < col_name : data_type [COMMENT col_comment], ...>
- 
+
 union_type
    : UNIONTYPE < data_type, data_type, ... >  -- (Note: Available in Hive 0.7.0 and later)
- 
+
 row_format
   : DELIMITED [FIELDS TERMINATED BY char [ESCAPED BY char]] [COLLECTION ITEMS TERMINATED BY char]
         [MAP KEYS TERMINATED BY char] [LINES TERMINATED BY char]
         [NULL DEFINED AS char]   -- (Note: Available in Hive 0.13 and later)
   | SERDE serde_name [WITH SERDEPROPERTIES (property_name=property_value, property_name=property_value, ...)]
- 
+
 file_format:
   : SEQUENCEFILE
   | TEXTFILE    -- (Default, depending on hive.default.fileformat configuration)
@@ -129,11 +137,12 @@ file_format:
   | PARQUET     -- (Note: Available in Hive 0.13.0 and later)
   | AVRO        -- (Note: Available in Hive 0.14.0 and later)
   | INPUTFORMAT input_format_classname OUTPUTFORMAT output_format_classname
- 
+
 constraint_specification:
   : [, PRIMARY KEY (col_name, ...) DISABLE NOVALIDATE ]
-    [, CONSTRAINT constraint_name FOREIGN KEY (col_name, ...) REFERENCES table_name(col_name, ...) DISABLE NOVALIDATE 
+    [, CONSTRAINT constraint_name FOREIGN KEY (col_name, ...) REFERENCES table_name(col_name, ...) DISABLE NOVALIDATE
 ```
 
-# Some important tblproperties
-* `skip.header.line.count=1` to skip the header row in the csv files. 
+## Some important tblproperties
+
+* `skip.header.line.count=1` to skip the header row in the csv files.

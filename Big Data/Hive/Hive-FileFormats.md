@@ -1,7 +1,8 @@
 # File formats support in Hive
 
 ## AVRO
-> [Wiki Page for AvroSerde](https://cwiki.apache.org/confluence/display/Hive/AvroSerDe)   
+
+> [Wiki Page for AvroSerde](https://cwiki.apache.org/confluence/display/Hive/AvroSerDe)
 > AvroSerde is available since Hive v0.9.1.
 
 ### Creating a Avro backed table
@@ -46,7 +47,7 @@ CREATE TABLE parquet_test (
  str string,
  mp MAP<STRING,STRING>,
  lst ARRAY<STRING>,
- strct STRUCT<A:STRING,B:STRING>) 
+ strct STRUCT<A:STRING,B:STRING>)
 PARTITIONED BY (part string)
 STORED AS PARQUET;
 ```
@@ -54,30 +55,31 @@ STORED AS PARQUET;
 * ParquetSerde
 > `parquet.hive.serde.ParquetHiveSerDe`
 
+## Compressing
 
-# Compressing
 You can import text files compressed with Gzip or Bzip2 directly into a table stored as TextFile. The compression will be detected automatically and the file will be decompressed on-the-fly during query execution.Ex-
+
 ```sql
 CREATE TABLE raw (line STRING)
    ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
- 
+
 LOAD DATA LOCAL INPATH '/tmp/weblogs/20090603-access.log.gz' INTO TABLE raw;
 ```
 
 Note: GZ is non-splittable format. Convert it or use a splittable format for better performance.
 
-# [SerDes available in Hive](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-RowFormats&SerDe) 
+## [SerDes available in Hive](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-RowFormats&SerDe)
 
-* [Avro](https://cwiki.apache.org/confluence/display/Hive/AvroSerDe) (Hive 0.9.1 and later)  
+* [Avro](https://cwiki.apache.org/confluence/display/Hive/AvroSerDe) (Hive 0.9.1 and later)
     `org.apache.hadoop.hive.serde2.avro.AvroSerDe`
 * [ORC](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+ORC) (Hive 0.11 and later)
-* [RegEx](https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-ApacheWeblogData)   
+* [RegEx](https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-ApacheWeblogData)
     `org.apache.hadoop.hive.serde2.RegexSerDe`
 * [Thrift](http://thrift.apache.org/)
-* [Parquet](https://cwiki.apache.org/confluence/display/Hive/Parquet) (Hive 0.13 and later)  
+* [Parquet](https://cwiki.apache.org/confluence/display/Hive/Parquet) (Hive 0.13 and later)
     `parquet.hive.serde.ParquetHiveSerDe`
-* [CSV](https://cwiki.apache.org/confluence/display/Hive/CSV+Serde) (Hive 0.14 and later)  
+* [CSV](https://cwiki.apache.org/confluence/display/Hive/CSV+Serde) (Hive 0.14 and later)
     `org.apache.hadoop.hive.serde2.OpenCSVSerde`
-* JsonSerDe (Hive 0.12 and later in hcatalog-core)  
-    `org.apache.hive.hcatalog.data.JsonSerDe`  
+* JsonSerDe (Hive 0.12 and later in hcatalog-core)
+    `org.apache.hive.hcatalog.data.JsonSerDe`
     > Requires `ADD JAR /usr/lib/hive-hcatalog/share/hcatalog/hive-hcatalog-core.jar;` on some distributions.

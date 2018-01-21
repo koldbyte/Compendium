@@ -49,6 +49,6 @@
 ## Research
 
 * Impedence mismatch problem [Link](https://en.wikipedia.org/wiki/Object-relational_impedance_mismatch)
-* Polyglot Persistence [Martin Fowler] (https://www.martinfowler.com/bliki/PolyglotPersistence.html)
+* Polyglot Persistence [Martin Fowler](https://www.martinfowler.com/bliki/PolyglotPersistence.html)
 * CAP Theorem in Plain English [Link](http://ksat.me/a-plain-english-introduction-to-cap-theorem/)
 * PACELC [Link](https://en.wikipedia.org/wiki/PACELC_theorem)
