@@ -2,26 +2,39 @@
 
 ## Parquet
 
+### Parquet without compression
+
 ```scala
-val pandaFriends = hiveCtx.sql("SELECT name FROM people WHERE favouriteAnimal = \"panda\"")
+val pandaFriends = sqlContext.sql("SELECT name FROM people WHERE favouriteAnimal = \"panda\"")
 pandaFriends.saveAsParquetFile("hdfs://...")
 ```
 
-## Parquet in Compressed Format
+### Parquet in Compressed Format
+
+Method 1:
 
 ```scala
 sqlContext.setConf("spark.sql.parquet.compression.codec", "snappy") // Acceptable values include: uncompressed, snappy, gzip, lzo
 df.write.parquet(hdfsLocation)
 ```
 
+Method 2: **(Not supported in 1.6)**
+
+```scala
+//This can be one of the known case-insensitive shorten names(none, snappy, gzip, and lzo). This will override spark.sql.parquet.compression.codec.
+df.write.option("compression", "snappy").parquet(hdfsLocation)
+```
+
 ## Avro
+
+### Avro without compression
 
 ```scala
 import com.databricks.spark.avro._
 df.write.avro(hdfsLocation)
 ```
 
-## Avro in Compressed format
+### Avro in Compressed format
 
 ```scala
 import com.databricks.spark.avro._
@@ -55,6 +68,14 @@ Saves the content of the DataFrame in a text file at the specified path. The Dat
 df.write.text(hdfsLocation)
 ```
 
+### Text File from dataframe (with compression) **(Not supported in 1.6)**
+
+```scala
+//Default is "null"
+df.write.option("compression", "snappy") //This can be one of the known case-insensitive shorten names (none, bzip2, gzip, lz4, snappy and deflate).
+.text(hdfsLocation)
+```
+
 ### Text File From RDD (no compression)
 
 ```scala
@@ -84,6 +105,8 @@ rdd.saveAsObjectFile(hdfsLocation)
 
 ## JSON File
 
+### JSON without compression
+
 ```scala
 df.write.json(hdfsLocation)
 ```
@@ -92,8 +115,18 @@ df.write.json(hdfsLocation)
 df.toJSON.saveAsTextFile(hdfsLocation)
 ```
 
-## JSON File Compressed
+### JSON File in Compressed format
+
+Method 1:
 
 ```scala
 df.toJSON.saveAsTextFile(hdfsLocation, classOf[org.apache.hadoop.io.compress.GzipCodec])
+```
+
+Method 2: **(Not supported in 1.6)**
+
+```scala
+// This can be one of the known case-insensitive shorten names (none, bzip2, gzip, lz4, snappy and deflate).
+df.write.option("compression", "snappy") //default null
+    .json(hdfsLocation)
 ```
