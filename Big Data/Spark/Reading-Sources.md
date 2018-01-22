@@ -4,8 +4,8 @@
 
 Fully qualified name : `org.apache.spark.sql.parquet`
 
-```python
-val rows = hiveCtx.parquetFile(parquetFile)
+```scala
+val rows = sqlContext.parquetFile(parquetFile)
 ```
 
 ```scala
@@ -23,7 +23,7 @@ val parquetFile = sqlContext.read.parquet("people.parquet")
 ## JSON
 
 ```scala
-val input = hiveCtx.jsonFile(inputFile)
+val input = sqlContext.jsonFile(inputFile)
 input.printSchema()
 ```
 
@@ -41,9 +41,23 @@ Note: Access nested elements using '.' (dot) for each level of nesting.
 
 Run `spark-shell --packages com.databricks:spark-avro_2.11:4.0.0`
 
+Note: Cloudera Quickstart Sandbox includes the avro package.
+
 ```scala
-import com.data.bricks.spark.avro._
+import com.databricks.spark.avro._
 val df = sqlContext.read.avro(hdfsLocation)
+```
+
+### Using a custom Avro Schema
+
+```scala
+import org.apache.avro.Schema
+val schema = new Schema.Parser().parse(new File("user.avsc"))
+
+val df = sqlContext.read
+  .format("com.databricks.spark.avro")
+  .option("avroSchema", schema.toString)
+  .load("src/test/resources/episodes.avro").show()
 ```
 
 ## RDDs to Dataframe
@@ -120,7 +134,9 @@ Note: To get started you will need to include the JDBC driver for you particular
 ## SequenceFiles
 
 ```scala
+import org.apache.hadoop.io._
 
+val file=sc.sequenceFile[BytesWritable,String](hdfsLocation)
 ```
 
 Note: For SequenceFiles, use SparkContext’s sequenceFile[K, V] method where K and V are the types of key and values in the file. These should be subclasses of Hadoop’s Writable interface, like IntWritable and Text. In addition, Spark allows you to specify native types for a few common Writables; for example, sequenceFile[Int, String] will automatically read IntWritables and Texts.
@@ -135,6 +151,14 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat
 
 val conf = new Configuration(sc.hadoopConfiguration)
 conf.set("textinputformat.record.delimiter", "\n")
+/*
+public <K,V,F extends org.apache.hadoop.mapreduce.InputFormat<K,V>> RDD<scala.Tuple2<K,V>> newAPIHadoopFile(    java.lang.String path,
+  java.lang.Class<F> fClass, //Class of the InputFormat
+  java.lang.Class<K> kClass, //Class of the keys
+  java.lang.Class<V> vClass, //Class of the values
+  org.apache.hadoop.conf.Configuration conf
+)
+*/
 val input = sc.newAPIHadoopFile("file_path", classOf[TextInputFormat], classOf[LongWritable], classOf[Text], conf)
 val lines = input.map { case (_, text) => text.toString}
 println(lines.collect)
