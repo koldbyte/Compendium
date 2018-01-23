@@ -71,6 +71,8 @@ happyPeopleSchemaRDD.registerTempTable("happy_people")
 
 ```scala
 //Scala
+// this is used to implicitly convert an RDD to a DataFrame.
+import sqlContext.implicits._
 case class HappyPerson(handle: String, favouriteBeverage: String)
 ...
 // Create a person and turn it into a Schema RDD
@@ -163,3 +165,22 @@ val input = sc.newAPIHadoopFile("file_path", classOf[TextInputFormat], classOf[L
 val lines = input.map { case (_, text) => text.toString}
 println(lines.collect)
 ```
+
+## Range
+
+* range(start: Long, end: Long, step: Long, numPartitions: Int)
+
+* range(start: Long, end: Long)
+
+## Collections
+
+* createDataFrame(data: List[_], beanClass: Class[_])
+* createDataFrame(rows: List[Row], schema: StructType)
+
+## RDD
+
+* createDataFrame(rdd: JavaRDD[_], beanClass: Class[_])
+* createDataFrame(rdd: RDD[_], beanClass: Class[_])
+* createDataFrame(rowRDD: JavaRDD[Row], schema: StructType)
+* createDataFrame(rowRDD: RDD[Row], schema: StructType)
+* createDataFrame[A <: Product](rdd: RDD[A])
