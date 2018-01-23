@@ -114,6 +114,8 @@ Create a multi-dimensional cube for the current DataFrame using the specified co
 df.cube("department", "group").avg()
 ```
 
+See [Mastering Spark SQL Gitbook](https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql-multi-dimensional-aggregation.html#cube) for examples.
+
 ### **distinct**
 
 * distinct()
@@ -247,6 +249,8 @@ df.rollup($"department", $"gender").agg(Map(
 ))
 ```
 
+See [Mastering Spark SQL Gitbook](https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql-multi-dimensional-aggregation.html#rollup) for examples.
+
 ### **select**
 
 Selects a set of columns.
@@ -281,9 +285,13 @@ peopleDf.filter($"age" > 15)
 
 ### **withColumn**
 
+* withColumn(colName: String, col: Column)
+
 Returns a new DataFrame by adding a column or replacing the existing column that has the same name.
 
 ### **withColumnRenamed**
+
+* withColumnRenamed(existingName: String, newName: String)
 
 Returns a new DataFrame with a column renamed. This is a no-op if schema doesn't contain existingName.
 

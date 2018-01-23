@@ -68,6 +68,13 @@ Saves the content of the DataFrame in a text file at the specified path. The Dat
 df.write.text(hdfsLocation)
 ```
 
+Note: Use this technique to write Dataframe as Comma or Delimiter Separated Values
+
+```scala
+df.map(_.mkString(",")).toDF.write.text(hdfsLocation)
+df.map(_.mkString("\t")).toDF.write.text(hdfsLocation)
+```
+
 ### Text File from dataframe (with compression) **(Not supported in 1.6)**
 
 ```scala

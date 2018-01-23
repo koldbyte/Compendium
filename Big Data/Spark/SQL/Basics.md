@@ -43,6 +43,20 @@ Spark SQL supports the vast majority of Hive features, such as:
   * ORDER BY
   * CLUSTER BY
   * SORT BY
+
+Note:
+
+---
+`ORDER BY x`: guarantees global ordering, but does this by pushing all data through just one reducer. This is basically unacceptable for large datasets. You end up one sorted file as output.
+
+`SORT BY x`: orders data at each of N reducers, but each reducer can receive overlapping ranges of data. You end up with N or more sorted files with overlapping ranges.
+
+`DISTRIBUTE BY x`: ensures each of N reducers gets non-overlapping ranges of x, but doesn't sort the output of each reducer. You end up with N or unsorted files with non-overlapping ranges.
+
+`CLUSTER BY x`: ensures each of N reducers gets non-overlapping ranges, then sorts by those ranges at the reducers. This gives you global ordering, and is the same as doing (`DISTRIBUTE BY x` and `SORT BY x`). You end up with N or more sorted files with non-overlapping ranges.
+
+---
+
 * All Hive operators, including:
   * Relational operators (=, ⇔, ==, <>, <, >, >=, <=, etc)
   * Arithmetic operators (+, -, *, /, %, etc)
