@@ -1,4 +1,4 @@
-# Syntax 
+# Syntax
 
 > Usage: mysql [OPTIONS] [database]
 

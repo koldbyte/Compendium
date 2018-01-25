@@ -118,7 +118,7 @@ sqoop import \
 * `--query` can be used to pass custom query to import the data
 
 * `--fields-terminated-by '|' \`
-* `--lines-terminated-by 'n' \`
+* `--lines-terminated-by '\n' \`
 
 ## Import into existing hive table
 
@@ -143,7 +143,7 @@ sqoop import \
   --password=cloudera \
   --table departments \
   --fields-terminated-by '|' \
-  --lines-terminated-by 'n' \
+  --lines-terminated-by '\n' \
   --hive-home /user/hive/warehouse \
   --hive-import \
   --hive-overwrite \
@@ -180,7 +180,7 @@ sqoop import \
 sqoop eval --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
   --username retail_dba \
   --password cloudera \
-  --query "select * from departments" 
+  --query "select * from departments"
 ```
 
 `hadoop fs -cat /user/cloudera/sqoop_merge/departments/part*`
@@ -244,7 +244,7 @@ sqoop merge --merge-key department_id \
 
 --Move/rename stage directory to original directory
 
-`hadoop fs -mv /user/cloudera/sqoop_merge/departments_stage /user/cloudera/sqoop_merge/departments `
+`hadoop fs -mv /user/cloudera/sqoop_merge/departments_stage /user/cloudera/sqoop_merge/departments`
 
 --Validate that original directory have merged data
 
@@ -257,13 +257,25 @@ sqoop merge --merge-key department_id \
 give either ‘-m 1’ or ‘–split-by ‘
 
 ```bash
-$sqoop import --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" --username retail_dba --password cloudera --table departments_nopk --target-dir /user/cloudera/departments -m 1
+sqoop import \
+  --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username retail_dba \
+  --password cloudera \
+  --table departments_nopk \
+  --target-dir /user/cloudera/departments \
+  -m 1
 ```
 
 OR
 
 ```bash
-$sqoop import --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" --username retail_dba --password cloudera --table departments_nopk --target-dir /user/cloudera/departments --split-by department_id
+sqoop import \
+  --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username retail_dba \
+  --password cloudera \
+  --table departments_nopk \
+  --target-dir /user/cloudera/departments \
+  --split-by department_id
 ```
 
 ## Incremental
@@ -271,7 +283,14 @@ $sqoop import --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" --user
 ### Option 1 using where
 
 ```bash
-sqoop import --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" --username retail_dba --password cloudera --table departments --append --target-dir /user/cloudera/sqoop_import/departments/ --where "department_id > 7"
+sqoop import \
+  --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username retail_dba \
+  --password cloudera \
+  --table departments \
+  --append \
+  --target-dir /user/cloudera/sqoop_import/departments/ \
+  --where "department_id > 7"
 ```
 
 * `–append` and `–where` works togeather in incremental loads. If `–append` not given then it will error out
@@ -279,7 +298,16 @@ sqoop import --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" --usern
 ### Option 2 using incremental-append
 
 ```bash
-sqoop import --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" --username retail_dba --password cloudera --table departments --append --target-dir /user/cloudera/sqoop_import/departments/ --check-column department_id --incremental append --last-value 7
+sqoop import \
+  --connect "jdbc:mysql://quickstart.cloudera:3306/retail_db" \
+  --username retail_dba \
+  --password cloudera \
+  --table departments \
+  --append \
+  --target-dir /user/cloudera/sqoop_import/departments/ \
+  --check-column department_id \
+  --incremental append \
+  --last-value 7
 ```
 
 * –append is req in this case as well

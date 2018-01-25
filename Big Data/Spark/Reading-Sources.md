@@ -100,7 +100,11 @@ val schema =
     schemaString.split(" ").map(fieldName => StructField(fieldName, StringType, true)))
 
 // Convert records of the RDD (people) to Rows.
+//Method 1: Manually specifying each columns
 val rowRDD = people.map(_.split(",")).map(p => Row(p(0), p(1).trim))
+
+//Method 2: Using a helper method
+val rowRDD = people.map(_.split(",")).map(p => Row.fromSeq(p))
 
 // Apply the schema to the RDD.
 val peopleDataFrame = sqlContext.createDataFrame(rowRDD, schema)

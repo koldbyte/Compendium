@@ -18,17 +18,17 @@
 
 ### Examples
 
-1. Running a query from the command line (-e)  
+1. Running a query from the command line (-e)
 > `$HIVE_HOME/bin/hive -e 'select a.col from tabl1 a'`
 
-1. Dumping data out of a query into a file (-S)  
+1. Dumping data out of a query into a file (-S)
 > `$HIVE_HOME/bin/hive -S -e 'select a.col from tabl1 a' > a.txt`
 
-1. Running a script file non-interactively  
-> `$HIVE_HOME/bin/hive -f /home/my/hive-script.sql`   
+1. Running a script file non-interactively
+> `$HIVE_HOME/bin/hive -f /home/my/hive-script.sql`
 > `$HIVE_HOME/bin/hive -f hdfs://<namenode>:<port>/directory/hive-script.sql`
 
-1. Run with logging configuration  
+1. Run with logging configuration
 > `$HIVE_HOME/bin/hive --hiveconf hive.root.logger=INFO,console`
 
 ### Interactive Shell Commands
@@ -66,4 +66,5 @@
 1. `!quit`
 
 ### Connection URL Format
+
 `jdbc:hive2://<host1>:<port1>,<host2>:<port2>/dbName;initFile=<file>;sess_var_list?hive_conf_list#hive_var_list`

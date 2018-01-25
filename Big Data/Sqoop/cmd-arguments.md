@@ -4,11 +4,11 @@
 
 | Argument| Description|
 |---|---|
-|`--connect <jdbc-uri>`| Specify JDBC connect string
-|-P| Read password from console
-|`--password <password>`| Set authentication password
-|`--username <username>`| Set authentication username
-|`--verbose`| Print more information while working
+|`--connect <jdbc-uri>`         | Specify JDBC connect string
+|-P                             | Read password from console
+|`--password <password>`        | Set authentication password
+|`--username <username>`        | Set authentication username
+|`--verbose`                    | Print more information while working
 
 ## Hive Related
 
@@ -107,7 +107,7 @@ usage: sqoop import [GENERIC-ARGS] [TOOL-ARGS]
 |--hive-database <database-name>             |Sets the database name to use when importing to hive
 |--hive-delims-replacement <arg>             |Replace Hive record \0x01 and row delimiters (\n\r) from imported string fields with user-defined string
 |--hive-drop-import-delims                   |Drop Hive record \0x01 and row delimiters (\n\r) from importedstring fields
-|--hive-home <dir>                           |Override $HIVE_HOME 
+|--hive-home <dir>                           |Override $HIVE_HOME
 |--hive-import                               |Import tables into Hive (Uses Hive's default delimiters if are set.)
 |--hive-overwrite                            |Overwrite existing data in the Hive table
 |--hive-partition-key <partition-key>        |Sets the partition key to use when importing to hive
@@ -119,11 +119,11 @@ usage: sqoop import [GENERIC-ARGS] [TOOL-ARGS]
 
 | Argument| Description|
 |---|---|
-|--column-family <family> |Sets the target column family for the import
-|--hbase-bulkload |Enables HBase bulk loading
-|--hbase-create-table |If specified, create missing HBase tables
-|--hbase-row-key <col> |Specifies which input column to use as the row key
-|--hbase-table <table> |Import to <table> in HBase
+|--column-family <family>                   |Sets the target column family for the import
+|--hbase-bulkload                           |Enables HBase bulk loading
+|--hbase-create-table                       |If specified, create missing HBase tables
+|--hbase-row-key <columnname>               |Specifies which input column to use as the row key
+|--hbase-table <tablename>                  |Import to <tablename> in HBase
 
 ### HCatalog arguments
 
@@ -157,23 +157,23 @@ usage: sqoop import [GENERIC-ARGS] [TOOL-ARGS]
 |--accumulo-instance <instance>        | Accumulo instance name.
 |--accumulo-max-latency <latency>      | Max write latency in milliseconds
 |--accumulo-password <password>        | Accumulo password.
-|--accumulo-row-key <col>              | Specifies which input column to use as the row key
-|--accumulo-table <table>              | Import to <table> in Accumulo
+|--accumulo-row-key <columnname>       | Specifies which input column to use as the row key
+|--accumulo-table <tablename>          | Import to <tablename> in Accumulo
 |--accumulo-user <user>                | Accumulo user name.
 |--accumulo-visibility <vis>           | Visibility token to be applied to all rows imported
 |--accumulo-zookeepers <zookeepers>    | Comma-separated list of zookeepers (host:port)
 
-### Code generation arguments:
+### Code generation arguments
 
 | Argument| Description|
 |---|---|
-|--bindir <dir>| Output directory for compiled objects
-|--class-name <name>| Sets the generated class name. This overrides --package-name. When combined with --jar-file, sets the input class.
-|--input-null-non-string <null-str>| Input null non-string representation
-|--input-null-string <null-str>| Input null string representation
-|--jar-file <file>| Disable code generation; use specified jar
-|--map-column-java <arg>| Override mapping for specific columns to java types
-|--null-non-string <null-str>| Null non-string representation
-|--null-string <null-str>| Null string representation
-|--outdir <dir>| Output directory for generated code
-|--package-name <name>| Put auto-generated classes in this package
+|--bindir <dir>                         | Output directory for compiled objects
+|--class-name <name>                    | Sets the generated class name. This overrides --package-name. When combined with --jar-file, sets the input class.
+|--input-null-non-string <null-str>     | Input null non-string representation
+|--input-null-string <null-str>         | Input null string representation
+|--jar-file <file>                      | Disable code generation; use specified jar
+|--map-column-java <arg>                | Override mapping for specific columns to java types
+|--null-non-string <null-str>           | Null non-string representation
+|--null-string <null-str>               | Null string representation
+|--outdir <dir>                         | Output directory for generated code
+|--package-name <name>                  | Put auto-generated classes in this package
