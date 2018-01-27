@@ -151,7 +151,7 @@ case class Book(title: String, words: String)
 val df: RDD[Book]
 
 case class Word(word: String)
-val allWords = df.explode('words) {
+val allWords = df.explode($"words") {
   case Row(words: String) => words.split(" ").map(Word(_))
 }
 

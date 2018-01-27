@@ -108,10 +108,9 @@ sqoop import \
 
 ### Notes
 
-* `--as-textfile` (default): to store data in HDFS using text file format. Other valid formats are
+* `--as-textfile` (default): to store data in HDFS using text file format
 * `--as-avrodatafile`: Imports data to Avro Data Files
 * `--as-sequencefile`: Imports data to SequenceFiles
-* `--as-textfile`: Imports data as plain text (default)
 * `--as-parquetfile`: Imports data to Parquet Files (from 1.4.6)
 
 * `--split-by` can be used to use multiple threads in case there is no primary key or unique key in the table from source database. If --split-by is not used we should pass --num-mappers 1
@@ -293,7 +292,7 @@ sqoop import \
   --where "department_id > 7"
 ```
 
-* `–append` and `–where` works togeather in incremental loads. If `–append` not given then it will error out
+* `–append` and `–where` works together in incremental loads. If `–append` not given then it will error out
 
 ### Option 2 using incremental-append
 
