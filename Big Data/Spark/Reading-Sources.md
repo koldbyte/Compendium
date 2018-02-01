@@ -57,7 +57,9 @@ val schema = new Schema.Parser().parse(new File("user.avsc"))
 val df = sqlContext.read
   .format("com.databricks.spark.avro")
   .option("avroSchema", schema.toString)
-  .load("src/test/resources/episodes.avro").show()
+  .load("src/test/resources/episodes.avro")
+
+df.show()
 ```
 
 ## RDDs to Dataframe

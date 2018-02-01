@@ -105,7 +105,7 @@ Note: In Scala, `$"col-name"` returns Column using implicits.
 
 ### **cube**
 
-* cube(col1: String, cols: String*)5
+* cube(col1: String, cols: String*)
 
 Create a multi-dimensional cube for the current DataFrame using the specified columns, so we can run aggregation on them.
 
